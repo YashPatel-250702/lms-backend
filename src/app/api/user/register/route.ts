@@ -5,7 +5,7 @@ import { sendValidationResponse } from "@/responses/ValidationResponse";
 import { CommonErrorHandler, sendError } from "@/errors/Customerror";
 import { UserRegisterService } from "@/service/userService/UserRegisterService";
 import { UserValidation } from "@/shared/validations/UserValidation";
-export async function POST(req: NextRequest) {
+export async function POST(req: NextRequest):Promise<NextResponse> {
     try {
         const user: User = await req.json();
         const validatedData = UserValidation.safeParse(user); 

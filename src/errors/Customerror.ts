@@ -9,5 +9,5 @@ export class CommonErrorHandler extends Error {
     }
   }
   
-export const sendError = (message: string, status: number) =>
+export const sendError = (message: string, status: number): NextResponse =>
     NextResponse.json({ error: message }, { status });
