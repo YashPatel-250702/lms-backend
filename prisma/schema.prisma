@@ -22,7 +22,7 @@ enum Roles {
 model Users {
   user_id     String   @id @default(uuid())
   name        String
-  email       String  @unique
+  email       String   @unique
   password    String
   ph_no       String?
   role        Roles

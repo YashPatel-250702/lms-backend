@@ -1,4 +1,5 @@
-
+import { NextResponse } from "next/server";
+ 
 export class CommonErrorHandler extends Error {
     statusCode: number;
     constructor(message: string, statusCode: number) {
@@ -8,3 +9,5 @@ export class CommonErrorHandler extends Error {
     }
   }
   
+export const sendError = (message: string, status: number) =>
+    NextResponse.json({ error: message }, { status });

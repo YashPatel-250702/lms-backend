@@ -1,0 +1,37 @@
+
+
+/**
+ * Checks if a user with the given email exists in the database.
+ *
+ * @param email - The email address to check for existence.
+ * @returns A promise that resolves to the number of users with the given email.
+ */
+
+import { prisma } from "@/lib/Prims-client";
+import { User } from "@/models/User";
+
+export const exisrtingUserWithEmail = async (email: string):Promise<number> => {
+    const count = await prisma.users.count(
+        { where: { email:email } });
+    return count ;
+}
+
+
+/**
+ * Registers a user in the database.
+ *
+ * @param user - The user data to register.
+ * @returns A promise that resolves to the newly registered user.
+ */
+export const UserRegister = async (user: User) => {
+    const userData = await prisma.users.create({
+        data: {
+            name: user.name,
+            email: user.email,
+            password: user.password,
+            ph_no:user.ph_no,
+            role: user.role,
+        },
+    });
+    return userData;
+}
