@@ -35,3 +35,14 @@ export const UserRegister = async (user: User) => {
     });
     return userData;
 }
+
+/**
+ * Finds a user by their email in the database.
+ *
+ * @param email - The email address to search for.
+ * @returns A promise that resolves to the user if found, or null if not found.
+ */
+export const findUserByEmail=async(email:string)=>{
+    const user=await prisma.users.findUnique({where:{email:email}});
+    return user;
+}   

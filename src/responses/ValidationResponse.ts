@@ -1,7 +1,7 @@
 
 import { NextResponse } from "next/server";
  
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 export function sendValidationResponse(validatedData: any): NextResponse {
   const error: Record<string, string> = {};
  
