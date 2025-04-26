@@ -7,6 +7,14 @@ import { CommonErrorHandler, sendError } from "@/errors/Customerror";
 import { UserRegisterService } from "@/service/userService/UserRegisterService";
 import { UserValidation } from "@/shared/validations/UserValidation";
  
+/**
+ * Registers a new user in the system.
+ *
+ * @param req - The request object which contains the user data in the request body.
+ *
+ * @returns A JSON response containing a success message and a 201 status code on successful registration.
+ *          Sends a JSON response with an error message and a 400 or 500 status code on registration failure.
+ */
 export async function POST(req: NextRequest) {
     try {
         const user:User = await req.json();
