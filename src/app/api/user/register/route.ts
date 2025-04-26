@@ -5,13 +5,6 @@ import { sendValidationResponse } from "@/responses/ValidationResponse";
 import { CommonErrorHandler, sendError } from "@/errors/Customerror";
 import { UserRegisterService } from "@/service/userService/UserRegisterService";
 import { UserValidation } from "@/shared/validations/UserValidation";
-/**
- * Registers a new user in the system.
- * @param {NextRequest} req the request.
- * @returns {Promise<NextResponse>} the response.
- * @throws {CommonErrorHandler} if the request is invalid.
- * @throws {Error} if the user registration fails.
- */
 export async function POST(req: NextRequest) {
     try {
         const user: User = await req.json();
