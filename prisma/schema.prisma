@@ -1,0 +1,141 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Roles {
+  ADMIN
+  STUDENT
+  TEACHER
+}
+
+model Users {
+  user_id     String   @id @default(uuid())
+  name        String
+  email       String  @unique
+  password    String
+  ph_no       String?
+  role        Roles
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  adminProfile  AdminProfile?
+  teacherProfile TeacherProfile?
+  studentProfile StudentProfile?
+  courses    Courses[]
+  enrollments Enrollment[]
+  quizResults QuizResult[]
+}
+
+model AdminProfile {
+  admin_id         String   @id @default(uuid())
+  user_id          String   @unique
+  organization_name String
+  created_at       DateTime @default(now())
+  user             Users   @relation(fields: [user_id], references: [user_id])
+}
+
+model TeacherProfile {
+  teacher_id       String   @id @default(uuid())
+  user_id          String   @unique
+  experience       String?
+  specialization   String?
+  created_at       DateTime @default(now())
+  user             Users   @relation(fields: [user_id], references: [user_id])
+}
+
+model StudentProfile {
+  student_id       String   @id @default(uuid())
+  user_id          String   @unique
+  roll_number      String
+  branch           String
+  year             Int
+  created_at       DateTime @default(now())
+  user             Users   @relation(fields: [user_id], references: [user_id])
+}
+
+model Courses {
+  course_id       String   @id @default(uuid())
+  title           String
+  description     String
+  image_url       String
+  is_active       Boolean
+  teacher_id      String
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
+  teacher         Users   @relation(fields: [teacher_id], references: [user_id])
+  modules         Modules[]
+  enrollments     Enrollment[]
+}
+
+model Modules {
+  module_id       String   @id @default(uuid())
+  course_id       String
+  title           String
+  module_index    Int
+  course          Courses @relation(fields: [course_id], references: [course_id])
+  videos          Videos[]
+
+  Quiz Quiz[]
+}
+
+model Videos {
+  video_id        String   @id @default(uuid())
+  module_id       String
+  title           String
+  video_url       String
+  duration        String
+  module          Modules @relation(fields: [module_id], references: [module_id])
+}
+
+model Quiz {
+  quiz_id         String   @id @default(uuid())
+  module_id       String
+  quiz_name       String
+  duration        String
+  number_of_questions Int
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
+  module          Modules @relation(fields: [module_id], references: [module_id])
+  questionAndAnswers QuestionAndAnswers[]
+  quizResults     QuizResult[]
+}
+
+model QuestionAndAnswers {
+  question_id     String   @id @default(uuid())
+  quiz_id         String
+  question        String
+  options         Json
+  answer          String
+  quiz            Quiz @relation(fields: [quiz_id], references: [quiz_id])
+}
+
+model QuizResult {
+  result_id       String   @id @default(uuid())
+  quiz_id         String
+  student_id      String
+  score           Int
+  total_questions Int
+  correct_answers Int
+  attempted_at    DateTime @default(now())
+  quiz            Quiz @relation(fields: [quiz_id], references: [quiz_id])
+  student         Users @relation(fields: [student_id], references: [user_id])
+}
+
+model Enrollment {
+  enrollment_id   String   @id @default(uuid())
+  student_id      String
+  course_id       String
+  enrolled_at     DateTime @default(now())
+  student         Users @relation(fields: [student_id], references: [user_id])
+  course          Courses @relation(fields: [course_id], references: [course_id])
+}
