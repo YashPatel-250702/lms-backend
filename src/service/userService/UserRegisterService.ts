@@ -2,6 +2,9 @@ import { CommonErrorHandler } from "@/errors/Customerror";
 import { User } from "@/models/User";
 import { exisrtingUserWithEmail, UserRegister } from "@/repository/userrepository/UserRepository";
 import bcrypt from "bcrypt";
+import { sendMail } from "../mailSender";
+import EmailModel from "@/models/Email";
+import { RegistrationSuccessEmail } from "@/shared/constants/EmailMessages";
 
 /**
  * Registers a user in the database.
@@ -28,5 +31,11 @@ export const UserRegisterService = async (user: User) => {
         throw new CommonErrorHandler("User registration failed", 500);
     }
 
+    const emailModel:EmailModel = {
+      toEmail: user.email,
+      subject: "Welcome to bitLabs LMS – Registration Successful",
+      message:  RegistrationSuccessEmail(user.name),
+   };
+    await sendMail(emailModel); 
     return userData;
 }
