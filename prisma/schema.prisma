@@ -28,6 +28,7 @@ model Users {
   role        Roles
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
+  
   adminProfile  AdminProfile?
   teacherProfile TeacherProfile?
   studentProfile StudentProfile?
