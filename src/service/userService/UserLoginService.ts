@@ -25,9 +25,9 @@ export const userLoginService = async (email: string, password: string) => {
         throw new CommonErrorHandler("Invalid password", 401);
     }
     const payload:JWTPayload={
-        user_id:user.user_id||0,
-        email:user.email||"",
-        role:user.role||""
+        user_id:user.user_id,
+        email:user.email,
+        role:user.role
     }
     const token=await generateToken(payload);
 

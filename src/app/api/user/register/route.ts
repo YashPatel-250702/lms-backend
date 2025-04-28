@@ -5,18 +5,14 @@ import { sendValidationResponse } from "@/responses/ValidationResponse";
 import { CommonErrorHandler, sendError } from "@/errors/Customerror";
 import { UserRegisterService } from "@/service/userService/UserRegisterService";
 import { UserValidation } from "@/shared/validations/UserValidation";
-
-
 /**
- * Registers a user with the given details.
+ * Registers a new user with the given email, password, and name.
  *
- * @param req - The request object which contains the user details in the request body.
+ * @param req - The request object which contains the email, password, and name in the request body.
  *
- * @returns A JSON response containing a success message, a 201 status code, and a newly created user object on successful registration.
+ * @returns A JSON response containing a success message and a 201 status code on successful user registration.
  *          Sends a JSON response with an error message and a 400 or 500 status code on registration failure.
  */
-
-
 export async function POST(req: NextRequest) {
     try {
         const user: User = await req.json();
@@ -34,9 +30,7 @@ export async function POST(req: NextRequest) {
 
     } catch (error) {
         console.error("Error in user registration:", error);
-        if (error instanceof CommonErrorHandler) {
-            return sendError(error.message, error.statusCode);
-        }
-        return sendError("User registration failed", 500);  
+       
+        return sendError(error);  
     }
 }

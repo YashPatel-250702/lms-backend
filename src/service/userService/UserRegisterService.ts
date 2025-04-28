@@ -30,7 +30,6 @@ export const UserRegisterService = async (user: User) => {
     if (!userData) {
         throw new CommonErrorHandler("User registration failed", 500);
     }
-
     const emailModel:EmailModel = {
       toEmail: user.email,
       subject: "Welcome to bitLabs LMS – Registration Successful",

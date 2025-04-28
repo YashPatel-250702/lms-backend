@@ -73,6 +73,7 @@ model Courses {
   teacher_id      String
   created_at      DateTime @default(now())
   updated_at      DateTime @updatedAt
+
   teacher         Users   @relation(fields: [teacher_id], references: [user_id])
   modules         Modules[]
   enrollments     Enrollment[]
@@ -83,6 +84,7 @@ model Modules {
   course_id       String
   title           String
   module_index    Int
+
   course          Courses @relation(fields: [course_id], references: [course_id])
   videos          Videos[]
 
@@ -95,6 +97,7 @@ model Videos {
   title           String
   video_url       String
   duration        String
+  
   module          Modules @relation(fields: [module_id], references: [module_id])
 }
 
