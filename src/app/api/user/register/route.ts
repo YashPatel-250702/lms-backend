@@ -22,9 +22,7 @@ export async function POST(req: NextRequest):Promise<NextResponse> {
 
     } catch (error) {
         console.error("Error in user registration:", error);
-        if (error instanceof CommonErrorHandler) {
-            return sendError(error.message, error.statusCode);
-        }
-        return sendError("User registration failed", 500);  
+       
+        return sendError(error);  
     }
 }
