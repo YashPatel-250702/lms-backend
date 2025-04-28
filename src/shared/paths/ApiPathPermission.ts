@@ -14,6 +14,10 @@ export const API_PATH_PERMISSION: Record<string, any>={
             ROLES.ADMIN,
             ROLES.STUDENT,
             ROLES.TEACHER
+        ],
+        [API_PATHS.ADD_NEW_COURSE]:[
+            ROLES.ADMIN,
+            ROLES.TEACHER
         ]
     },
 
