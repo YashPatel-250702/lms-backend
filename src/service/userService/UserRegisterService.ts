@@ -2,9 +2,9 @@ import { CommonErrorHandler } from "@/errors/Customerror";
 import { User } from "@/models/User";
 import { exisrtingUserWithEmail, UserRegister } from "@/repository/userrepository/UserRepository";
 import bcrypt from "bcrypt";
-import { sendMail } from "../mailSender";
 import EmailModel from "@/models/Email";
 import { RegistrationSuccessEmail } from "@/shared/constants/EmailMessages";
+import { sendMail } from "../mailSender";
 
 /**
  * Registers a user in the database.

@@ -97,8 +97,9 @@ model Modules {
 
 model ModuleContent {
   content_id   String   @id @default(uuid())
-  pdf          String
+  pdf_url      String
   video_url    String?
+  title        String
   duration     String
   module_id    String
 

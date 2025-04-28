@@ -10,7 +10,15 @@ export const existingModuleCount=async(course_id:string,title:string):Promise<nu
     });
     return moduleCount;
 }
+export const existingIndexCount=async(course_id:string,module_index:number):Promise<number>=>{
 
+    const indexCount:number=await prisma.modules.count({
+        where:{course_id:course_id,
+               module_index:module_index
+            }
+    });
+    return indexCount;
+}
 
 export const addModule=async(module:Module):Promise<string>=>{
     const result=await prisma.modules.create({
@@ -21,4 +29,11 @@ export const addModule=async(module:Module):Promise<string>=>{
         }
     });
     return result.module_id;
+}
+
+export const checkModuleWithId=async(module_id:string):Promise<number>=>{
+    const moduleCount=await prisma.modules.count({    
+        where:{module_id:module_id} 
+    });
+    return moduleCount;
 }
