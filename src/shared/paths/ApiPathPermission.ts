@@ -19,5 +19,17 @@ export const API_PATH_PERMISSION: Record<string, any>={
             ROLES.ADMIN,
             ROLES.TEACHER
         ]
+    },
+
+    [HTTP_METHODS.GET]:{
+        [API_PATHS.SEE_ALL_USERS]:[ 
+            ROLES.ADMIN
+        ],
+    }
+    ,
+    [HTTP_METHODS.DELETE]:{
+        [API_PATHS.DELETE_USER_BYID]:[
+            ROLES.ADMIN
+        ],
     }
 }
