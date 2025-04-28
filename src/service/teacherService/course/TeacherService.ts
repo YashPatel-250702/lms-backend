@@ -1,5 +1,5 @@
 import { CommonErrorHandler } from "@/errors/Customerror";
-import { getS3Client } from "@/lib/3Client";
+import { getS3Client } from "@/lib/S3Client";
 import { Course } from "@/models/CourseModel";
 import { addNewCourse, ExistCourseWithTitle, ExistTeacherWithId } from "@/repository/teacherrepository/course/TeacherRepository";
 import { PutObjectAclCommand, PutObjectCommand, S3Client } from "@aws-sdk/client-s3";

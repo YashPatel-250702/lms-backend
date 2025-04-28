@@ -40,3 +40,12 @@ export const addNewCourse = async (course: Course) => {
     });
     return courseData;
 }
+
+export const existCourseWithId = async (course_id: string): Promise<number> => {    
+    const count = await prisma.courses.count({
+        where: {
+            course_id: course_id,
+        },
+    });
+    return count;       
+}
