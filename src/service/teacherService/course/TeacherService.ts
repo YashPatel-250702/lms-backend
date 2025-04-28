@@ -1,7 +1,7 @@
 import { CommonErrorHandler } from "@/errors/Customerror";
-import { getS3Client } from "@/lib/3Client";
+import { getS3Client } from "@/lib/S3Client";
 import { Course } from "@/models/CourseModel";
-import { addNewCourse, ExistCourseWithTitle, ExistTeacherWithId } from "@/repository/teacherrepository/course/TeacherRepository";
+import { addNewCourse, deleteCourse, ExistCourseWithId, ExistCourseWithTitle, ExistTeacherWithId, SearchCourse } from "@/repository/teacherrepository/course/TeacherRepository";
 import { PutObjectAclCommand, PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 
 
@@ -52,4 +52,29 @@ const uploadImageToS3 = async (image: File,teacher_id:string):Promise<string> =>
     s3.send(new PutObjectCommand(params));
     const imageUrl=`https://${bucketName}.s3.amazonaws.com/${objectId}`
     return imageUrl;
+}
+
+
+export const deleteCourseById=async(course_id:string)=>{
+    const ExistCourse=await ExistCourseWithId(course_id);
+    if(ExistCourse===0){
+        throw new CommonErrorHandler("Course with this id does not exist",400);
+    }
+    const deletedCourse=await deleteCourse(course_id);
+    if(!deletedCourse){
+        throw new CommonErrorHandler("Course deletion failed",500);
+    }
+    return deletedCourse;
+}
+
+export const getCourseById=async(course_id:string)=>{
+    const ExistCourse=await ExistCourseWithId(course_id);
+    if(ExistCourse===0){
+        throw new CommonErrorHandler("Course with this id does not exist",400);
+    }
+    const course=await SearchCourse(course_id);
+    if(!course || course===null || course===undefined ){
+        throw new CommonErrorHandler("Course not found",404);
+    }
+    return course;
 }
