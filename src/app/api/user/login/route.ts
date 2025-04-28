@@ -15,17 +15,14 @@ export async function POST(req:NextRequest):Promise<NextResponse> {
     try {
         const {email,password}=await req.json();
         if(!email || !password){    
-            return sendError("Email and password are required", 400);
+            throw new CommonErrorHandler("Email and password are required", 400);
         }
         const loginResponse:UserLoginResponse=await userLoginService(email,password);
 
         return NextResponse.json({ message: "User logged in successfully",data:loginResponse}, { status: 200 });
         
     } catch (error) {
-        if(error instanceof CommonErrorHandler){
-            return sendError(error.message, error.statusCode);
-        }
-        return sendError("User login failed", 500);
+        return sendError(error);
         
     }
     
