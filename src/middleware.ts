@@ -44,8 +44,11 @@ export default async function middleware(request: NextRequest) {
     }
 
     return NextResponse.next();
-  } catch (error: any) {
-      return sendError(error);
+  } catch (error) {
+    if (error instanceof CommonErrorHandler) {
+      return sendError(error.message, error.statusCode);
+    }
+    return sendError("Something went wrong", 500);
   }
 }
 

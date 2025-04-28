@@ -23,6 +23,14 @@ export const exisrtingUserWithEmail = async (email: string):Promise<number> => {
  * @param user - The user data to register.
  * @returns A promise that resolves to the newly registered user.
  */
+
+export const checkUserById=async(userId:string)=>{
+    const userCount=await prisma.users.count({
+        where:{user_id:userId}
+    })
+
+    return userCount;
+}
 export const UserRegister = async (user: User) => {
     const userData = await prisma.users.create({
         data: {

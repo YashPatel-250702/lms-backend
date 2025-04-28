@@ -18,6 +18,10 @@ enum Roles {
   STUDENT
   TEACHER
 }
+enum UserStatus{
+  ACTIVE
+  SUSPENDED
+}
 
 model Users {
   user_id     String   @id @default(uuid())
@@ -26,6 +30,7 @@ model Users {
   password    String
   ph_no       String?
   role        Roles
+  account_status      UserStatus   @default(ACTIVE)
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
   
@@ -69,7 +74,7 @@ model Courses {
   title           String
   description     String
   image_url       String
-  is_active       Boolean
+  is_active       Boolean  @default(true)
   teacher_id      String
   created_at      DateTime @default(now())
   updated_at      DateTime @updatedAt
