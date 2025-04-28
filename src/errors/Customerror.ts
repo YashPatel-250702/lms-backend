@@ -9,10 +9,5 @@ export class CommonErrorHandler extends Error {
     }
   }
   
-export const sendError = (error:any): NextResponse =>{
-
-  if(error instanceof CommonErrorHandler) {
-    NextResponse.json({ error: error.message }, {status: error.statusCode });
-  }
-  return NextResponse.json({ error: "Something went wrong" }, { status: 500 });
-}
+export const sendError = (message: string, status: number): NextResponse =>
+    NextResponse.json({ error: message }, { status });
