@@ -85,26 +85,26 @@ model Courses {
 }
 
 model Modules {
-  module_id       String   @id @default(uuid())
-  course_id       String
-  title           String
-  module_index    Int
+  module_id     String           @id @default(uuid())
+  course_id     String
+  title         String
+  module_index  Int
 
-  course          Courses @relation(fields: [course_id], references: [course_id])
-  videos          Videos[]
-
-  Quiz Quiz[]
+  course        Courses          @relation(fields: [course_id], references: [course_id])
+  contents      ModuleContent[]  
+  Quiz          Quiz[]
 }
 
-model Videos {
-  video_id        String   @id @default(uuid())
-  module_id       String
-  title           String
-  video_url       String
-  duration        String
-  
-  module          Modules @relation(fields: [module_id], references: [module_id])
+model ModuleContent {
+  content_id   String   @id @default(uuid())
+  pdf          String
+  video_url    String?
+  duration     String
+  module_id    String
+
+  module       Modules  @relation(fields: [module_id], references: [module_id])  
 }
+
 
 model Quiz {
   quiz_id         String   @id @default(uuid())

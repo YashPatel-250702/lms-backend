@@ -16,10 +16,17 @@ export const ExistCourseWithTitle = async (teacher_id: string,title: string): Pr
 
 export const ExistTeacherWithId = async (teacher_id: string): Promise<number> => {
     const count = await prisma.users.count({
-        where: { user_id: teacher_id ,role: "TEACHER" },
+        where: {
+            user_id: teacher_id,
+            OR: [
+                { role: "TEACHER" },
+                { role: "ADMIN" }
+            ]
+        },
     });
     return count;
 }
+
 
 export const addNewCourse = async (course: Course) => {
     const courseData = await prisma.courses.create({
