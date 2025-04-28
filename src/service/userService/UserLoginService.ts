@@ -22,12 +22,17 @@ export const userLoginService = async (email: string, password: string) => {
     }
     const isPasswordMatch = await bcrypt.compare(password, user.password);
     if (!isPasswordMatch) {
-        throw new CommonErrorHandler("Invalid password", 401);
+        throw new CommonErrorHandler("Invalid password", 400);
     }
+
+    if(user.account_status!=="ACTIVE") {
+        throw new CommonErrorHandler("User Account is not active", 401);
+    }
+
     const payload:JWTPayload={
-        user_id:user.user_id||0,
-        email:user.email||"",
-        role:user.role||""
+        user_id:user.user_id,
+        email:user.email,
+        role:user.role
     }
     const token=await generateToken(payload);
 
