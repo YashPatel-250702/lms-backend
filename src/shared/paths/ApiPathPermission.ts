@@ -34,11 +34,20 @@ export const API_PATH_PERMISSION: Record<string, any>={
         [API_PATHS.SEE_ALL_USERS]:[ 
             ROLES.ADMIN
         ],
+        [API_PATHS.GET_COURSE_BYID]:[
+            ROLES.ADMIN,
+            ROLES.TEACHER,
+            ROLES.STUDENT
+        ]
     }
     ,
     [HTTP_METHODS.DELETE]:{
         [API_PATHS.DELETE_USER_BYID]:[
             ROLES.ADMIN
+        ],
+        [API_PATHS.DELETE_COURSE]:[
+            ROLES.ADMIN,
+            ROLES.TEACHER
         ],
     }
 }

@@ -1,9 +1,9 @@
 import { CommonErrorHandler, sendError } from "@/errors/Customerror";
-import { Course } from "@/models/CourseModel";
-import { sendValidationResponse } from "@/responses/ValidationResponse";
-import { addCourse } from "@/service/teacherService/course/TeacherService";
-import { CourseValidation } from "@/shared/validations/courseValidation";
+import { Course } from "../../../../../models/CourseModel";
+import { sendValidationResponse } from "../../../../../responses/ValidationResponse";
+import { addCourse } from "../../../../../service/teacherService/course/TeacherService";
 import { NextRequest, NextResponse } from "next/server";
+import { CourseValidation } from "@/shared/validations/courseValidation";
 
 export async function POST(req: NextRequest) {
     try {
@@ -35,6 +35,7 @@ export async function POST(req: NextRequest) {
             return sendValidationResponse(validatedData);
         }
         const createdCourse = await addCourse(course, image);
+        
         return NextResponse.json({ message: "Course created successfully" }, { status: 201 });
 
     } catch (error) {
