@@ -89,21 +89,12 @@ model Modules {
   course_id       String
   title           String
   module_index    Int
-
-  course          Courses @relation(fields: [course_id], references: [course_id])
-  videos          Videos[]
-
-  Quiz Quiz[]
-}
-
-model Videos {
-  video_id        String   @id @default(uuid())
-  module_id       String
-  title           String
   video_url       String
   duration        String
-  
-  module          Modules @relation(fields: [module_id], references: [module_id])
+  course          Courses @relation(fields: [course_id], references: [course_id])
+
+
+  Quiz Quiz[]
 }
 
 model Quiz {

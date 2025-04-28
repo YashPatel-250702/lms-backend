@@ -17,7 +17,7 @@ export const addCourse = async (course: Course,image:File) => {
         throw new CommonErrorHandler("Course with this title already exists", 400);
     } 
 
-    const imageUrl=await uploadImageToS3(image);
+    const imageUrl=await uploadImageToS3(image,course.teacher_id);
     if(!imageUrl){
         throw new CommonErrorHandler("Image upload failed",500)
     }
@@ -33,13 +33,13 @@ export const addCourse = async (course: Course,image:File) => {
 
 
 
-const uploadImageToS3 = async (image: File):Promise<string> => {
+const uploadImageToS3 = async (image: File,teacher_id:string):Promise<string> => {
     const bucketName=process.env.AWS_BUCKET_NAME;
     const folderName=process.env.AWS_FOLDER_NAME;  
 
     const buffer = await image.arrayBuffer();
 
-    const objectId=`${folderName}/${image.name}`;
+    const objectId=`${folderName}/${image.name}-${teacher_id}`;
 
     const s3:S3Client=getS3Client();
     const params = {
