@@ -43,9 +43,18 @@ export default async function middleware(request: NextRequest) {
       }
     }
 
-    return NextResponse.next();
-  } catch (error: any) {
-      return sendError(error);
+    const user_id = payload.user_id as string;
+    const response = NextResponse.next();
+    console.log("User ID from payload:", user_id);
+    response.headers.set("x-user-id", user_id); 
+
+    return response;
+  } catch (error) {
+    if (error instanceof CommonErrorHandler) {
+                return sendError(error.message, error.statusCode);
+            }
+    
+      return sendError("Authorization failed", 401);
   }
 }
 
