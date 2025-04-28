@@ -69,7 +69,7 @@ model Courses {
   title           String
   description     String
   image_url       String
-  is_active       Boolean
+  is_active       Boolean  @default(true)
   teacher_id      String
   created_at      DateTime @default(now())
   updated_at      DateTime @updatedAt
