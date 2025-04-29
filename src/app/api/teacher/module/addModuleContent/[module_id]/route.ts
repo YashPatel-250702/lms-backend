@@ -27,7 +27,9 @@ export async function POST(req:NextRequest,{params}:{params:{module_id:string}})
         const moduleContent:ModuleContent={
             module_id:module_id,
             title:title,
-            duration:duration, 
+            duration:duration,
+            pdf_url:"",
+            video_url:"" 
         }
         const validatedData=ModuleContentValidation.safeParse(moduleContent);
 
