@@ -23,29 +23,20 @@ export const ExistCourseWithId = async (course_id: string): Promise<number> => {
     return count;
 }
 
-export const SearchCourse = async (course_id: string): Promise<Course> => {
+export const SearchCourse = async (course_id: string)=> {
     const course = await prisma.courses.findUnique({
       where: { course_id },
+      include:{
+        modules:{
+            include:{
+                contents:true,
+            },
+        },
+      },
     });
-  
-    if (!course) {
-      throw new Error("Course not found");
-    }
-  
-    return {
-      course_id: course.course_id,
-      teacher_id: course.teacher_id,
-      course_title: course.title, 
-      course_description: course.description,
-      course_imageUrl: course.image_url,
-      is_active: course.is_active
-      
-  };
+  return course;
 }
   
-  
-  
-
 export const deleteCourse = async (course_id: string) => {
     const deletedCourse = await prisma.courses.delete({
         where: {
@@ -91,3 +82,4 @@ export const existCourseWithId = async (course_id: string): Promise<number> => {
     });
     return count;       
 }
+
