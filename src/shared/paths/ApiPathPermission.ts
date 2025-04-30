@@ -38,6 +38,11 @@ export const API_PATH_PERMISSION: Record<string, any>={
             ROLES.ADMIN,
             ROLES.TEACHER,
             ROLES.STUDENT
+        ],
+        [API_PATHS.GET_MODULES_BY_COURSE_ID]:[
+            ROLES.ADMIN,
+            ROLES.TEACHER,
+            ROLES.STUDENT
         ]
     }
     ,

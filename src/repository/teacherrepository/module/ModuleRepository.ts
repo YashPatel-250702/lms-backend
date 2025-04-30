@@ -37,3 +37,11 @@ export const checkModuleWithId=async(module_id:string):Promise<number>=>{
     });
     return moduleCount;
 }
+
+export const findModulesByCourseId=async(course_id:string)=>{
+    const result=await prisma.modules.findMany({
+        where:{course_id:course_id},
+        include:{contents:true}
+    })
+    return result;
+}
