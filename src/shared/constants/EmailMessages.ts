@@ -22,7 +22,7 @@ export function RegistrationSuccessEmail(name: string): string {
   </div>
    
       <div style="text-align: center; margin: 30px 0;">
-  <a href="https://upskill.bitlabs.in/login/index.php" style="background-color: #4CAF50; color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: bold;">Login to Your Account</a>
+  <a href="https://v0-lms-website-development.vercel.app/" style="background-color: #4CAF50; color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: bold;">Login to Your Account</a>
   </div>
    
       <p style="font-size: 14px; line-height: 1.6;">

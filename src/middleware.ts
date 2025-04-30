@@ -45,7 +45,6 @@ export default async function middleware(request: NextRequest) {
 
     const user_id = payload.user_id as string;
     const response = NextResponse.next();
-    //console.log("User ID from payload:", user_id);
     response.headers.set("x-user-id", user_id); 
 
     return response;
