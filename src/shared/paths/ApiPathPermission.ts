@@ -54,5 +54,10 @@ export const API_PATH_PERMISSION: Record<string, any>={
             ROLES.ADMIN,
             ROLES.TEACHER
         ],
+    },
+    [HTTP_METHODS.PUT]:{
+        [API_PATHS.SUSPENDED_USER_BYID]:[
+            ROLES.ADMIN
+        ]
     }
 }
