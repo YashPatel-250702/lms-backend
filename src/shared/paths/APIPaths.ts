@@ -6,6 +6,7 @@ export enum API_PATHS{
     //ADMIN PATHS
     SEE_ALL_USERS="/api/admin/seeAllUsers",
     DELETE_USER_BYID="/api/admin/user_id/removeUser",
+    SUSPENDED_USER_BYID="/api/admin/user_id/suspendUser",
 
     //Teacher PATHS
     ADD_NEW_COURSE="/api/teacher/course/addNewCourse",
