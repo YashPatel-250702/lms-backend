@@ -2,6 +2,7 @@ import { CommonErrorHandler } from "@/errors/Customerror";
 import { JWTPayload, SignJWT,jwtVerify } from "jose";
 
 const secretKey=process.env.JWT_SCRETE||"secret"; 
+
 /**
  * Generates a JSON Web Token (JWT) from the given payload. The token is signed with a secret key
  * and has a lifetime of 24 hours.

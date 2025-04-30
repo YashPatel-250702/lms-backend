@@ -32,11 +32,13 @@ export const checkUserById=async(userId:string)=>{
     return userCount;
 }
 export const findUserById=async(userId:string)=>{
-    const userCount=await prisma.users.findUnique({
+    console.log(userId);
+    const user=await prisma.users.findUnique({
         where:{user_id:userId}
     })
 
-    return userCount;
+    console.log(user);
+    return user;
 }
 export const UserRegister = async (user: User) => {
     const userData = await prisma.users.create({
