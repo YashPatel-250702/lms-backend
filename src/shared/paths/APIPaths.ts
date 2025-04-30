@@ -4,14 +4,22 @@ export enum API_PATHS{
     USER_LOGIN="/api/user/login",
     USER_REGISTER="/api/user/register",
 
-<<<<<<< HEAD
+
+
 
 
     //ADMIN PATHS
     SEE_ALL_USERS="/api/admin/seeAllUsers",
-    DELETE_USER_BYID="/api/admin/removeUser/:id"
-=======
+    DELETE_USER_BYID="/api/admin/removeUser/:id",
+
     //Teacher PATHS
     ADD_NEW_COURSE="/api/teacher/course/addNewCourse",
->>>>>>> c6d2a62b2d5a09e648d83275ea152e30678b3425
+
+    DELETE_COURSE="/api/teacher/course/deleteCourse/:course_id",
+    GET_COURSE_BYID="/api/teacher/course/getCourse/:course_id",
+    ADD_MODULE_COURSE_Id="/api/teacher/module/addModule/:course_id",
+    ADD_MODULE_CONTENT="/api/teacher/module/addModuleContent/:module_id",
+
+    GET_MODULES_BY_COURSE_ID="/api/teacher/module/getModules/:course_id",
+
 }
