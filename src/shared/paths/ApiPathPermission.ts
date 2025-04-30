@@ -59,6 +59,10 @@ export const API_PATH_PERMISSION: Record<string, any>={
             ROLES.ADMIN,
             ROLES.TEACHER
         ],
+        [API_PATHS.DELETE_ALL_INACTIVE_COURSES]:[
+            ROLES.ADMIN,
+            ROLES.TEACHER
+        ],
     },
     [HTTP_METHODS.PUT]:{
         [API_PATHS.SUSPENDED_USER_BYID]:[

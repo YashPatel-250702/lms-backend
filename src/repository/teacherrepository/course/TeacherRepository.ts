@@ -85,3 +85,12 @@ export const findAllCouses = async () => {
     });
     return courses;
 }
+
+export const findAllInActiveCouses = async () => {
+    const courses = await prisma.courses.findMany({
+        where: {
+            is_active: false,
+        },
+    });
+    return courses;
+}
