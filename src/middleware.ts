@@ -48,6 +48,7 @@ export default async function middleware(request: NextRequest) {
     response.headers.set("x-user-id", user_id); 
 
     return response;
+    
   } catch (error) {
     if (error instanceof CommonErrorHandler) {
                 return sendError(error.message, error.statusCode);
