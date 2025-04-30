@@ -13,6 +13,7 @@ export enum API_PATHS{
 
     DELETE_COURSE="/api/teacher/course/:course_id/deleteCourse",
     GET_COURSE_BYID="/api/teacher/course/:course_id/getCourse",
+    GET_ALL_COURSES="/api/teacher/course/getAllCourses",
     ADD_MODULE_COURSE_Id="/api/teacher/course/:course_id/addModule",
     ADD_MODULE_CONTENT="/api/teacher/module/:module_id/addModuleContent",
 

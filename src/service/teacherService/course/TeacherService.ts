@@ -1,7 +1,7 @@
 import { CommonErrorHandler } from "@/errors/Customerror";
 import { getS3Client } from "@/lib/S3Client";
 import { Course } from "@/models/CourseModel";
-import { addNewCourse, deleteCourse, ExistCourseWithId, ExistCourseWithTitle, ExistTeacherWithId, findCourseById } from "@/repository/teacherrepository/course/TeacherRepository";
+import { addNewCourse, deleteCourse, ExistCourseWithId, ExistCourseWithTitle, ExistTeacherWithId, findAllCouses, findCourseById } from "@/repository/teacherrepository/course/TeacherRepository";
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 
 
@@ -77,4 +77,12 @@ export const getCourseById=async(course_id:string)=>{
         throw new CommonErrorHandler("Course not found",404);
     }
     return course;
+}
+
+export const getAllCourses=async()=>{
+    const courses=await findAllCouses();
+    if(!courses || courses===null || courses===undefined ){
+        throw new CommonErrorHandler("Courses not found",404);
+    }
+    return courses;
 }
