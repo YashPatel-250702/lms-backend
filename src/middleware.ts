@@ -3,6 +3,7 @@ import { CommonErrorHandler, sendError } from "./errors/Customerror";
 import { verifyToken } from "./utils/JwtUtil";
 import { API_PATH_PERMISSION } from "./shared/paths/ApiPathPermission";
 import { JWTPayload } from "jose";
+import { findUserById } from "./repository/userrepository/UserRepository";
 
 export default async function middleware(request: NextRequest) {
   try {
@@ -47,6 +48,15 @@ export default async function middleware(request: NextRequest) {
     const response = NextResponse.next();
     //console.log("User ID from payload:", user_id);
     response.headers.set("x-user-id", user_id); 
+    const userData=await findUserById(user_id);
+
+    if (!userData) {
+      throw new CommonErrorHandler("User not found", 404);
+    }
+
+    if(userData.account_status!=="ACTIVE") {
+      throw new CommonErrorHandler("User Account is Suspended Try After Some Time", 401);
+    }
 
     return response;
   } catch (error) {
