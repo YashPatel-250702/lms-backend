@@ -6,7 +6,7 @@ export async function GET(req:NextRequest,{params}:{params:{course_id:string}}){
     try {
         const course_id=params.course_id;
         const course=await getCourseById(course_id);
-        return NextResponse.json({course:course},{status:200});
+        return NextResponse.json({message:"Course fetched successfully",course:course},{status:200});
     } catch (error) {
         if(error instanceof CommonErrorHandler)
             sendError(error.message,error.statusCode);
