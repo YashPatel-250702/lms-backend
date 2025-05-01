@@ -3,7 +3,7 @@ import { z } from "zod";
 export const quizSchema = z.object({
   module_id: z.string().uuid({ message: "Invalid module ID" }),
   quiz_name: z.string().min(3, "Quiz name must be at least 3 characters"),
-  duration: z.string().min(3, "Duration is required"),
+  duration: z.string().nonempty("Duration is required"),
   number_of_questions: z.number().int().min(1, "Must have at least 1 question"),
 //   questions: z
 //     .array(

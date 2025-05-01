@@ -1,16 +1,26 @@
 
 import { prisma } from "@/lib/Prims-client";
-import { Quiz } from "@prisma/client";
+import { Quiz } from "@/models/Quiz";
 
 
-type QuizInput = Omit<Quiz, "quiz_id" | "created_at" | "updated_at" | "module_id">;
-
-export const addQuiz = async (module_id: string, quiz: QuizInput): Promise<Quiz> => {
+export const addQuiz = async (quiz: Quiz): Promise<Quiz> => {
   const result = await prisma.quiz.create({
     data: {
-      ...quiz,
-      module_id, 
+      module_id: quiz.module_id,
+      quiz_name: quiz.quiz_name,
+      duration: quiz.duration,
+      number_of_questions: quiz.number_of_questions,
+      
     },
   });
   return result;
 };
+
+
+export const verfyQuizNameExists=async(module_id:string,quiz_name:string):Promise<boolean>=>{
+    const result=await prisma.quiz.findFirst({
+        where:{module_id:module_id,quiz_name:quiz_name},
+        select:{quiz_name:true}
+    })
+    return !!result;
+}
