@@ -10,6 +10,7 @@ export async function DELETE(req:NextRequest,{params}:{params:{course_id:string}
         }
         const teacherId = req.headers.get("x-user-id")||"";
         const userRole = req.headers.get("x-user-role")||"";
+        
         const deletedModules=await deleteModuleByCourse(course_id,teacherId,userRole);
         return NextResponse.json({message:"Modules Deleted Successfully with course id: "+course_id},{status:200});
         

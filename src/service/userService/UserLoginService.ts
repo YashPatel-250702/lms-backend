@@ -18,7 +18,7 @@ export const userLoginService = async (email: string, password: string) => {
 
     const user=await findUserByEmail(email);
     if (!user) {
-        throw new CommonErrorHandler("User not found with email"+email, 404);
+        throw new CommonErrorHandler("User not found with email", 404);
     }
     const isPasswordMatch = await bcrypt.compare(password, user.password);
     if (!isPasswordMatch) {
