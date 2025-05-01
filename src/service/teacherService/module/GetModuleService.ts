@@ -1,6 +1,6 @@
 import { CommonErrorHandler } from "@/errors/Customerror";
 import { ExistCourseWithId } from "@/repository/teacherrepository/course/TeacherRepository"
-import { checkModuleWithId, findModuleById, findModulesByCourseId } from "@/repository/teacherrepository/module/ModuleRepository";
+import { checkModuleWithId, findAllModules, findModuleById, findModulesByCourseId } from "@/repository/teacherrepository/module/ModuleRepository";
 
 export const getModulesByCourseId=async(course_id:string)=>{
    const courseCount=await ExistCourseWithId(course_id);
@@ -21,6 +21,14 @@ export const getModuleById=async(module_id:string)=>{
     const result=await findModuleById(module_id);
     if(!result){
         throw new CommonErrorHandler("No modules found for moduleid: "+module_id,404)
+    }
+    return result;
+}
+
+export const getAllModules=async()=>{
+    const result=await findAllModules();
+    if(!result||result.length==0){
+        throw new CommonErrorHandler("No modules found",404)
     }
     return result;
 }
