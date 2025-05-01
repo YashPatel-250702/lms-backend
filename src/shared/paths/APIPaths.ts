@@ -12,10 +12,15 @@ export enum API_PATHS{
     ADD_NEW_COURSE="/api/teacher/course/addNewCourse",
 
     DELETE_COURSE="/api/teacher/course/:course_id/deleteCourse",
+    DELETE_ALL_INACTIVE_COURSES="/api/teacher/course/deleteAllCourses",
     GET_COURSE_BYID="/api/teacher/course/:course_id/getCourse",
+    GET_ALL_COURSES="/api/teacher/course/getAllCourses",
     ADD_MODULE_COURSE_Id="/api/teacher/course/:course_id/addModule",
     ADD_MODULE_CONTENT="/api/teacher/module/:module_id/addModuleContent",
 
     GET_MODULES_BY_COURSE_ID="/api/teacher/course/:course_id/getModules",
+
     ADD_QUIZ="/api/teacher/course/module/:module_id/addQuiz",
+
+    GET_MODULE_BYID="/api/teacher/course/module/:module_id/getModule",
 }

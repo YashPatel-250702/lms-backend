@@ -43,7 +43,20 @@ export const API_PATH_PERMISSION: Record<string, any>={
             ROLES.ADMIN,
             ROLES.TEACHER,
             ROLES.STUDENT
+        ],
+
+        [API_PATHS.GET_MODULE_BYID]:[
+            ROLES.ADMIN,
+            ROLES.TEACHER,
+            ROLES.STUDENT
         ]
+,
+        [API_PATHS.GET_ALL_COURSES]:[
+            ROLES.ADMIN,
+            ROLES.TEACHER,
+            ROLES.STUDENT
+        ],
+
     }
     ,
     [HTTP_METHODS.DELETE]:{
@@ -51,6 +64,10 @@ export const API_PATH_PERMISSION: Record<string, any>={
             ROLES.ADMIN
         ],
         [API_PATHS.DELETE_COURSE]:[
+            ROLES.ADMIN,
+            ROLES.TEACHER
+        ],
+        [API_PATHS.DELETE_ALL_INACTIVE_COURSES]:[
             ROLES.ADMIN,
             ROLES.TEACHER
         ],

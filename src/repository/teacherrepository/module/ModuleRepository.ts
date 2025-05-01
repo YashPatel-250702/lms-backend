@@ -45,3 +45,11 @@ export const findModulesByCourseId=async(course_id:string)=>{
     })
     return result;
 }
+
+export const findModuleById=async(module_id:string)=>{
+    const result=await prisma.modules.findUnique({
+        where:{module_id:module_id},
+        include:{contents:true}
+    })
+    return result;
+}
