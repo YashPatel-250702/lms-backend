@@ -1,10 +1,10 @@
 import { CommonErrorHandler, sendError } from "@/errors/Customerror";
 import { Quiz } from "@/models/Quiz";
 import { sendValidationResponse } from "@/responses/ValidationResponse";
-import { addQuizService } from "@/service/teacherService/module/QuizService";
+import { addQuizService, getAllQuizzesbyModuleId } from "@/service/teacherService/module/QuizService";
 import { quizSchema } from "@/shared/validations/QuizValidations";
-
 import { NextRequest, NextResponse } from "next/server";
+
 
 export async function POST(req:NextRequest,{params}:{params:{module_id:string}}){
     try
@@ -26,4 +26,27 @@ export async function POST(req:NextRequest,{params}:{params:{module_id:string}})
         }
         return sendError("Something went wrong while adding quiz: "+error, 500);
     }
+}
+
+
+
+
+
+export async function GET(req:NextRequest,{params}:{params:{module_id:string}}) 
+{
+    try{
+
+        const module_id=params.module_id;
+        const quizzes=await getAllQuizzesbyModuleId(module_id);
+        return NextResponse.json({message:"Quizzes fetched successfully",quizzes:quizzes},{status:200});
+
+    }
+    catch(error)
+    {
+        if(error instanceof CommonErrorHandler)
+        {
+            return sendError(error.message, error.statusCode);
+        }
+        return sendError("Something went wrong fettchinfg all quizzes : "+error, 500);
+    }    
 }

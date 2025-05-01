@@ -25,5 +25,9 @@ export enum API_PATHS{
 
     ADD_MODULE_CONTENT="/api/teacher/module/:module_id/addModuleContent",
     ADD_QUIZ="/api/teacher/course/module/:module_id/addQuiz",
- 
+
+    GET_ALL_QUIZZES="/api/teacher/course/module/:module_id/quiz/getAllQuiz",
+    // GET_QUIZ_BYID="/api/teacher/course/module/:module_id/quiz/:quiz_id/getQuiz", 
 }
+
+
