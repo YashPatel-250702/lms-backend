@@ -1,6 +1,6 @@
 import { CommonErrorHandler } from "@/errors/Customerror";
 
-import { addQuiz, verfyQuizNameExists } from "@/repository/teacherrepository/module/QuizRepository";
+import { addQuiz, findAllQuizsByModuleId, verfyQuizNameExists } from "@/repository/teacherrepository/module/QuizRepository";
 import { Quiz } from "@/models/Quiz";
 import { checkModuleWithId } from "@/repository/teacherrepository/module/ModuleRepository";
 
@@ -28,5 +28,22 @@ export const addQuizService=async(module_id:string,quiz:Quiz)=>{
     console.log("Adding quiz to database");
     const result=await addQuiz(quiz);
     console.log("Added quiz: ",result);
+    return result;
+}
+
+
+
+
+export const getAllQuizzesbyModuleId=async(module_id:string)=>{
+
+    const existungModuleCount=await checkModuleWithId(module_id);
+    if(existungModuleCount==0){
+        throw new CommonErrorHandler("Module with id: "+module_id+" does not exist",400)
+    }
+
+    const result=await findAllQuizsByModuleId(module_id)
+    if(result.length==0){
+        throw new CommonErrorHandler("No quizzes found for module id: "+module_id,404)
+    }
     return result;
 }
