@@ -48,6 +48,7 @@ model AdminProfile {
   admin_id          String   @id @default(uuid())
   user_id           String   @unique
   organization_name String
+
   created_at        DateTime @default(now())
   user              Users    @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
 }
@@ -69,6 +70,28 @@ model StudentProfile {
   year        Int
   created_at  DateTime @default(now())
   user        Users    @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
+  created_at       DateTime @default(now())
+  user             Users   @relation(fields: [user_id], references: [user_id],onDelete: Cascade)
+}
+
+model TeacherProfile {
+  teacher_id       String   @id @default(uuid())
+  user_id          String   @unique
+  experience       String?
+  specialization   String?
+  created_at       DateTime @default(now())
+  user             Users   @relation(fields: [user_id], references: [user_id],onDelete: Cascade)
+}
+
+model StudentProfile {
+  student_id       String   @id @default(uuid())
+  user_id          String   @unique
+  roll_number      String
+  branch           String
+  year             Int
+  created_at       DateTime @default(now())
+  user             Users   @relation(fields: [user_id], references: [user_id],onDelete: Cascade)
+
 }
 
 model Courses {
@@ -81,9 +104,14 @@ model Courses {
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
 
+
   teacher     Users        @relation(fields: [teacher_id], references: [user_id], onDelete: Cascade)
   modules     Modules[]
   enrollments Enrollment[]
+  teacher         Users   @relation(fields: [teacher_id], references: [user_id],onDelete: Cascade)
+  modules         Modules[]
+  enrollments     Enrollment[]
+
 }
 
 model Modules {
@@ -91,7 +119,6 @@ model Modules {
   course_id    String
   title        String
   module_index Int
-
   course   Courses         @relation(fields: [course_id], references: [course_id], onDelete: Cascade)
   contents ModuleContent[]
   Quiz     Quiz[]
@@ -106,6 +133,21 @@ model ModuleContent {
   module_id  String
 
   module Modules @relation(fields: [module_id], references: [module_id], onDelete: Cascade)
+  course        Courses          @relation(fields: [course_id], references: [course_id],onDelete: Cascade)
+  contents      ModuleContent[]  
+  Quiz          Quiz[]
+}
+
+model ModuleContent {
+  content_id   String   @id @default(uuid())
+  pdf_url      String
+  video_url    String?
+  title        String
+  duration     String
+  module_id    String
+
+  module       Modules  @relation(fields: [module_id], references: [module_id],onDelete: Cascade)  
+
 }
 
 model Quiz {
@@ -128,6 +170,20 @@ model QuestionAndAnswers {
   options     Json
   answer      String
   quiz        Quiz   @relation(fields: [quiz_id], references: [quiz_id], onDelete: Cascade)
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
+  module          Modules @relation(fields: [module_id], references: [module_id],onDelete: Cascade)
+  questionAndAnswers QuestionAndAnswers[]
+  quizResults     QuizResult[]
+}
+
+model QuestionAndAnswers {
+  question_id     String   @id @default(uuid())
+  quiz_id         String
+  question        String
+  options         Json
+  answer          String
+  quiz            Quiz @relation(fields: [quiz_id], references: [quiz_id],onDelete: Cascade)
 }
 
 model QuizResult {
@@ -173,4 +229,16 @@ enum WorkshopStatus {
   APPROVED
   REJECTED_CREATION
   REJECTED_DELETION
+  quiz            Quiz @relation(fields: [quiz_id], references: [quiz_id],onDelete: Cascade)
+  student         Users @relation(fields: [student_id], references: [user_id],onDelete: Cascade)
+}
+
+model Enrollment {
+  enrollment_id   String   @id @default(uuid())
+  student_id      String
+  course_id       String
+  enrolled_at     DateTime @default(now())
+  student         Users @relation(fields: [student_id], references: [user_id],onDelete: Cascade)
+  course          Courses @relation(fields: [course_id], references: [course_id],onDelete: Cascade)
+
 }
