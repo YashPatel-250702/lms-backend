@@ -47,7 +47,7 @@ model AdminProfile {
   user_id          String   @unique
   organization_name String
   created_at       DateTime @default(now())
-  user             Users   @relation(fields: [user_id], references: [user_id])
+  user             Users   @relation(fields: [user_id], references: [user_id],onDelete: Cascade)
 }
 
 model TeacherProfile {
@@ -56,7 +56,7 @@ model TeacherProfile {
   experience       String?
   specialization   String?
   created_at       DateTime @default(now())
-  user             Users   @relation(fields: [user_id], references: [user_id])
+  user             Users   @relation(fields: [user_id], references: [user_id],onDelete: Cascade)
 }
 
 model StudentProfile {
@@ -66,7 +66,7 @@ model StudentProfile {
   branch           String
   year             Int
   created_at       DateTime @default(now())
-  user             Users   @relation(fields: [user_id], references: [user_id])
+  user             Users   @relation(fields: [user_id], references: [user_id],onDelete: Cascade)
 }
 
 model Courses {
@@ -79,7 +79,7 @@ model Courses {
   created_at      DateTime @default(now())
   updated_at      DateTime @updatedAt
 
-  teacher         Users   @relation(fields: [teacher_id], references: [user_id])
+  teacher         Users   @relation(fields: [teacher_id], references: [user_id],onDelete: Cascade)
   modules         Modules[]
   enrollments     Enrollment[]
 }
@@ -90,7 +90,7 @@ model Modules {
   title         String
   module_index  Int
 
-  course        Courses          @relation(fields: [course_id], references: [course_id])
+  course        Courses          @relation(fields: [course_id], references: [course_id],onDelete: Cascade)
   contents      ModuleContent[]  
   Quiz          Quiz[]
 }
@@ -103,7 +103,7 @@ model ModuleContent {
   duration     String
   module_id    String
 
-  module       Modules  @relation(fields: [module_id], references: [module_id])  
+  module       Modules  @relation(fields: [module_id], references: [module_id],onDelete: Cascade)  
 }
 
 
@@ -115,7 +115,7 @@ model Quiz {
   number_of_questions Int
   created_at      DateTime @default(now())
   updated_at      DateTime @updatedAt
-  module          Modules @relation(fields: [module_id], references: [module_id])
+  module          Modules @relation(fields: [module_id], references: [module_id],onDelete: Cascade)
   questionAndAnswers QuestionAndAnswers[]
   quizResults     QuizResult[]
 }
@@ -126,7 +126,7 @@ model QuestionAndAnswers {
   question        String
   options         Json
   answer          String
-  quiz            Quiz @relation(fields: [quiz_id], references: [quiz_id])
+  quiz            Quiz @relation(fields: [quiz_id], references: [quiz_id],onDelete: Cascade)
 }
 
 model QuizResult {
@@ -137,8 +137,8 @@ model QuizResult {
   total_questions Int
   correct_answers Int
   attempted_at    DateTime @default(now())
-  quiz            Quiz @relation(fields: [quiz_id], references: [quiz_id])
-  student         Users @relation(fields: [student_id], references: [user_id])
+  quiz            Quiz @relation(fields: [quiz_id], references: [quiz_id],onDelete: Cascade)
+  student         Users @relation(fields: [student_id], references: [user_id],onDelete: Cascade)
 }
 
 model Enrollment {
@@ -146,6 +146,6 @@ model Enrollment {
   student_id      String
   course_id       String
   enrolled_at     DateTime @default(now())
-  student         Users @relation(fields: [student_id], references: [user_id])
-  course          Courses @relation(fields: [course_id], references: [course_id])
+  student         Users @relation(fields: [student_id], references: [user_id],onDelete: Cascade)
+  course          Courses @relation(fields: [course_id], references: [course_id],onDelete: Cascade)
 }
