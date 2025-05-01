@@ -77,3 +77,20 @@ export const existCourseWithId = async (course_id: string): Promise<number> => {
     return count;       
 }
 
+export const findAllCouses = async () => {
+    const courses = await prisma.courses.findMany({
+        where: {
+            is_active: true,
+        },
+    });
+    return courses;
+}
+
+export const findAllInActiveCouses = async () => {
+    const courses = await prisma.courses.findMany({
+        where: {
+            is_active: false,
+        },
+    });
+    return courses;
+}
