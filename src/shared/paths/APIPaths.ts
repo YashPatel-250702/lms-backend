@@ -23,6 +23,11 @@ export enum API_PATHS{
     GET_ALL_MODULES="/api/course/teacher/module",
    
 
+    CREATE_WORKSHOP_REQUEST = "/api/teacher/workshop/createWorkshopRequest",
+    DELETE_WORKSHOP = "/api/teacher/workshop/:workshop_id/deleteWorkshop",
+    GET_ALL_WORKSHOPS = "/api/teacher/workshop",
+    GET_WORKSHOP_BYID = "/api/teacher/workshop/:workshop_id/getWorkshop",
+
     ADD_MODULE_CONTENT="/api/teacher/module/:module_id/addModuleContent",
     ADD_QUIZ="/api/teacher/course/module/:module_id/addQuiz",
  
