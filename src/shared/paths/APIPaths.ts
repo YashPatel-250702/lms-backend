@@ -24,6 +24,6 @@ export enum API_PATHS{
     DELETE_MODULE_BY_COURSEID="/api/teacher/course/:course_id/deleteAllModules",
 
     ADD_MODULE_CONTENT="/api/teacher/module/:module_id/addModuleContent",
-
-
+    ADD_QUIZ="/api/teacher/course/module/:module_id/addQuiz",
+ 
 }
