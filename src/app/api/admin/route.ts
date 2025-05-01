@@ -13,6 +13,5 @@ export async function GET(req:NextRequest) {
             return sendError(error.message, error.statusCode);
         }
         return sendError("Something went wrong while getting all users", 500);
-    }
-    
+    }  
 }
