@@ -68,3 +68,11 @@ export const deleteModuleByCourseId=async(course_id:string)=>{
     })
     return result;
 }
+
+export const deleteModuleByModuleId=async(module_id:string)=>{
+    const result=await prisma.modules.deleteMany({
+        where:{module_id:module_id}
+    
+    })
+    return result;
+}
