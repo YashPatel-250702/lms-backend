@@ -3,7 +3,6 @@ import { getAllModules } from "@/service/teacherService/module/GetModuleService"
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(_req: NextRequest) {
-    
     try {
         const modules = await getAllModules();
         return NextResponse.json({ message: "Modules fetched successfully", modules: modules }, { status: 200 });
@@ -14,3 +13,4 @@ export async function GET(_req: NextRequest) {
         return sendError("Something went wrong while getting all modules", 500);
     }
 }
+
