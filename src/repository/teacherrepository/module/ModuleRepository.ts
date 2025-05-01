@@ -53,3 +53,18 @@ export const findModuleById=async(module_id:string)=>{
     })
     return result;
 }
+
+
+
+export const findAllModules=async()=>{
+    const result=await prisma.modules.findMany();
+    return result;
+}
+
+export const deleteModuleByCourseId=async(course_id:string)=>{
+    const result=await prisma.modules.deleteMany({
+        where:{course_id:course_id}
+    
+    })
+    return result;
+}
