@@ -6,7 +6,10 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(req:NextRequest) {
     try {
         const users:User[]=await getALlUsers();
-        return NextResponse.json({ message: "Users fetched successfully",data:users }, { status: 200 });
+        return NextResponse.json(
+            { message: "Users fetched successfully",data:users }, 
+            { status: 200 }
+        );
         
     } catch (error) {
         if(error instanceof CommonErrorHandler){
